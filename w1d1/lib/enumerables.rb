@@ -50,6 +50,18 @@ class Array
     false
   end
 
+  def my_all(&prc)
+    # copy the Array#all method
+    # returns true if the given block returns true for all
+    # elements in the array
+
+    self.my_each do |item|
+      return false unless prc.call(item)
+    end
+
+    true
+  end
+
   def my_flatten(flattened_array = [])
     # copy the Array#flatten method
     # takes an array of arrays and recursively returns
@@ -66,21 +78,23 @@ class Array
     flattened_array
   end
 
-  def my_rotate(num_times = 1)
+  def my_rotate(positions = 1)
     # rotates elements from front to back or back to front in a
     # one dimensional array. If positive, elements move
     # from right to left, if negative elements move from right to left.
+    # note the connection using modulo. For a negative number, instead
+    # of shifting opposite directions (IE negative shifts right and
+    # positive shifts left), the modulo operator allows us to
+    # differentiate between left and right because -3 % 4 == 1 and
+    # 3 % 4 == 3. shifting is cyclical; so any number of shifts mod 4
+    # equals any other number of shifts that has the same divisibility
+    # by four remainder.
+    
+    array = self.dup
+    moves = positions % self.length
 
-    self_duped = self.dup
-
-    if num_times > 0
-      num_times.times do
-        self_duped << self_duped.shift
-      end
-    else
-      (-num_times).times { self_duped.unshift(self_duped.pop) }
-    end
-    self_duped
+    moves.times { array << array.shift }
+    array
   end
 
   def my_zip(*args)
