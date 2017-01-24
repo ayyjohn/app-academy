@@ -1,7 +1,11 @@
 require_relative 'player'
 
 class Game
-
+  # simulates a game of the word game Ghost.
+  # each player adds a letter until one person
+  # completes a word contained in the dictionary.
+  # the person who completes the word loses
+  
   attr_accessor :fragment, :player1, :player2, :current_player, :previous_player
   attr_reader :dictionary
 
@@ -24,17 +28,17 @@ class Game
   end
 
   def switch_players
+    @previous_player = @current_player
+
     if @current_player == @player1
-      @previous_player = @current_player
       @current_player = @player2
     else
-      @previous_player = @current_player
       @current_player = @player1
     end
   end
 
   def play
-
+    puts "please choose a letter to start"
     until loses?
       take_turn(@current_player)
     end
@@ -60,6 +64,7 @@ class Game
   end
 
   def take_turn(player)
+    puts "the current letters are #{@fragment}"
     guess = player.guess
 
     until valid_play?(guess)
@@ -70,7 +75,7 @@ class Game
     @fragment += guess
 
     if loses?
-      puts "#{@previous_player} WINS!!"
+      puts "#{@previous_player.name} WINS!!"
     else
       switch_players
     end
@@ -81,9 +86,9 @@ class Game
       @fragment == key
     end
   end
-  
+
 end
 
 if __FILE__ == $PROGRAM_NAME
-  Game.new("dictionary.text", "Alec", "Fariba").play
+  Game.new("dictionary.txt", Player.new("Alec"), Player.new("Fariba")).play
 end

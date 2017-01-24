@@ -5,7 +5,7 @@ class Array
     # returns the original array, but applies the given
     # block to each element
 
-    i=0
+    i = 0
 
     while i < self.length
       prc.call(self[i])
@@ -74,9 +74,9 @@ class Array
     self_duped = self.dup
 
     if num_times > 0
-      num_times.times do |el|
+      num_times.times do
         self_duped << self_duped.shift
-       end
+      end
     else
       (-num_times).times { self_duped.unshift(self_duped.pop) }
     end
@@ -120,11 +120,11 @@ class Array
   def my_reverse
     # takes an array and returns the array with the elements in
     # reverse order.
-    
+
     dupe = self.dup
     half = dupe.length / 2
-    dupe[0..half].each_with_index do |element, index|
-      dupe[index], dupe[-1-index] = dupe[-1-index], dupe[index]
+    dupe[0..half].each_index do |index|
+      dupe[index], dupe[-1 - index] = dupe[-1 - index], dupe[index]
     end
     dupe
   end
