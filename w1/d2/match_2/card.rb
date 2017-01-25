@@ -1,6 +1,6 @@
 class Card
 
-  attr_reader :num
+  attr_reader :num, :face_up
 
   def initialize(num)
     @num = num
@@ -13,6 +13,10 @@ class Card
     @face_up = false
   end
 
+  def face_up?
+    @face_up
+  end
+  
   def reveal
     # changes a card to reveal its value
 
@@ -28,13 +32,14 @@ class Card
     else
       "X"
     end
+
   end
 
   def ==(other_card)
     # checks to see if one card is equal to another by comparing
     # their respective values
-    
-    @num == other_card.num
+
+    @num == other_card.num && other_card.is_a?(self.class)
   end
 
 end
