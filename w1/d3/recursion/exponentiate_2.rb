@@ -1,13 +1,11 @@
 def exp(base, power)
   return 1 if power == 0
   return base if power == 1
+
+  half = exp(base, power / 2)
   if power.even?
-    value = exp(base, power / 2)
-    p power
-    value * value
+    half * half
   else
-    value = exp(base, (power - 1) / 2)
-    p power
-    base * value * value
+    base * half * half
   end
 end
