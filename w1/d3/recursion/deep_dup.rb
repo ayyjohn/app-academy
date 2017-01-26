@@ -1,4 +1,5 @@
 class Array
+  
   def deep_dup(new_arr = [])
     # return a duplicate array where the references to each
     # array in the array are also different; therefore
@@ -14,7 +15,7 @@ class Array
 
   def deep_dup_inj
     # one line deep dup with inject
-    
+
     inject([]) { |dup, el| dup << (el.is_a?(Array) ? el.deep_dup_inj : el.dup) }
   end
 
