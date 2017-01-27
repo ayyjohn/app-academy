@@ -1,45 +1,64 @@
 require_relative 'tile'
 
 class Board
-  attr_accessor :grid
+  attr_reader :grid_size, :num_bombs
 
-  def initialize()
-    @grid = Array.new(9) { Array.new(9) }
-    self.set_up
-  end
+  def initialize(grid_size, num_bombs)
+    @grid_size, @num_bombs = grid_size, num_bombs
 
-  def set_up
-    @grid.each_index do |row|
-      @grid.each_index do |col|
-         self[[row,col]]= (rand(90) % 10 == 0 ? Tile.new(true) : Tile.new(false))
-      end
-    end
+    generate_board
   end
 
   def [](pos)
-    x, y = pos
-    @grid[x][y]
+    row, col = pos
+    @grid[row][col]
   end
 
-  def []=(pos, mark)
-    x, y = pos
-    @grid[x][y] = mark
+  def lost?
+    @grid.flatten.any? { |tile| tile.bombed? && tile.explored? }
   end
 
-  def display_for_user
+  def render(reveal = false)
 
-    @grid.each do |row|
-      row.each do |tile|
-        if tile.revealed
-          print " "
-        else
-          print "x" if !tile.marked
-          print "B" if tile.marked
-        end
-      end
-      puts
+    @grid.map do |row|
+      row.map do |tile|
+        reveal ? tile.reveal : tile.render
+      end.join("")
+    end.join("\n")
+  end
+
+  def reveal
+    render(true)
+  end
+
+  def won?
+    @grid.flatten.all? { |tile| tile.bombed? != tile.explored? }
+  end
+
+  private
+
+  def generate_board
+    @grid = Array.new(@grid_size) do |row|
+      Array.new(@grid_size) { |col| Tile.new(self, [row, col]) }
     end
+
+    plant_bombs
+  end
+
+  def plant_bombs
+    total_bombs = 0
+    while total_bombs < @num_bombs
+      rand_pos = Array.new(2) { rand(@grid_size) }
+
+      tile = self[rand_pos]
+      next if tile.bombed?
+
+      tile.plant_bomb
+      total_bombs += 1
+    end
+
     nil
+
   end
 
 end
