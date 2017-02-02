@@ -1,0 +1,26 @@
+alias aa="cd ~/Desktop/aa && ls"
+alias be="bundle exec rspec"
+alias ..="cd .. && ls"
+alias ...="cd ../.. && ls"
+alias l="ls"
+alias a="atom"
+alias bp="atom ~/.bashrc"
+alias ds="cd ~/Desktop && ls"
+alias doc="cd ~/Documents && ls"
+alias t="touch"
+alias gi="git init"
+alias gd="git diff"
+alias gds="git diff --staged"
+alias gpr="git pull --rebase"
+alias gco="git checkout"
+alias gcb="git checkout -b"
+alias gb="git branch"
+alias gs="git status"
+alias ga="git add"
+alias gaa="git add -A"
+alias gcm="git commit -m"
+alias gl="git log"
+
+c () {
+  cd "$@" && ls;
+}
