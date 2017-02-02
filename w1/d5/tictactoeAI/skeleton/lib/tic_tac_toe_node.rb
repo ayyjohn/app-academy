@@ -1,7 +1,7 @@
 require_relative 'tic_tac_toe'
 
 class TicTacToeNode
-  attr_reader :board :next_mover_mark, :prev_move_pos
+  attr_reader :board, :next_mover_mark, :prev_move_pos
 
   def initialize(board, next_mover_mark, prev_move_pos = nil)
     @board = board
@@ -50,9 +50,8 @@ class TicTacToeNode
 
         children << TicTacToeNode.new(new_board, next_mover_mark, pos)
       end
-
-      children
     end
+    children
   end
-  
+
 end
