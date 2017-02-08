@@ -1,5 +1,6 @@
 alias aa="cd ~/Desktop/aa && ls"
-alias be="bundle exec rspec"
+alias be="bundle exec"
+alias ber="bundle exec rspec"
 alias ..="cd .. && ls"
 alias ...="cd ../.. && ls"
 alias l="ls"
