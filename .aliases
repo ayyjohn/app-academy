@@ -1,14 +1,18 @@
-alias aa="cd ~/Desktop/aa && ls"
-alias be="bundle exec"
-alias ber="bundle exec rspec"
-alias ..="cd .. && ls"
-alias ...="cd ../.. && ls"
+# aliases
+
+#navigation and file creation
+alias aa="c ~/Desktop/aa"
+alias ..="c .."
+alias ...="c ../.."
 alias l="ls"
 alias a="atom"
 alias bp="atom ~/.bashrc"
-alias ds="cd ~/Desktop && ls"
-alias doc="cd ~/Documents && ls"
+alias ds="c ~/Desktop"
+alias doc="c ~/Documents"
+alias dl="c ~/Downloads"
 alias t="touch"
+alias mk="mkdir"
+#git
 alias gi="git init"
 alias gd="git diff"
 alias gds="git diff --staged"
@@ -20,7 +24,13 @@ alias gs="git status"
 alias ga="git add"
 alias gaa="git add -A"
 alias gcm="git commit -m"
+alias gp="git push"
 alias gl="git log"
+#rails
+alias be="bundle exec"
+alias ber="bundle exec rspec"
+alias rgm="rails g migration"
+alias rdm="rake db:migrate"
 
 c () {
   cd "$@" && ls;
